@@ -44,6 +44,10 @@ public class Point {
 
     // Перегруженный метод toString, чтобы можно было выводить
     // объект Point в System.out.print()
+    // P.S.
+    // Он ругаться будет за @Override? (в плане очень сильно дрючить)
+    // P.P.S.
+    // Надо не забыть удалить эти комменты
     @Override
     public String toString() {
         return "Point(" + this.x + ", " + this.y + ")";

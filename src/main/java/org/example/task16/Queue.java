@@ -52,13 +52,19 @@ public class Queue<T> {
     private Node last;
     private int size;
 
+    /**
+     * Пустой конструктор
+     */
     public Queue() {
         first = null;
         last = null;
         size = 0;
     }
 
-    // добавляет новый Node в конец очереди
+    /**
+     * добавляет новый Node в конец очереди
+     * @param data ифнормация которую хранит элемент очереди
+     */
     public void add(T data) {
         if (size == 0) {
             first = new Node(data);
@@ -82,7 +88,9 @@ public class Queue<T> {
         size++;
     }
 
-    // удаляет первый элемент очереди
+    /**
+     * удаляет первый элемент очереди
+     */
     public void remove() {
         if (size == 0) return;
 
@@ -99,18 +107,31 @@ public class Queue<T> {
         size--;
     }
 
-    // геттер для size
+    /**
+     * геттер для size
+     * @return возвращает размер очереди
+     */
     public int size() {
         return size;
     }
 
+    /**
+     * Перегруженный метод toString, чтобы можно было выводить
+     *  объект Queue в System.out.print()
+     * @return  возвращает строку с содержимым очереди
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         Node node = first;
         sb.append("[");
         for (int i = 0; i < size; i++) {
+            sb.append("'");
             sb.append(node.getData());
+            sb.append("'");
+            if (node.next != null) {
+                sb.append(",");
+            }
             node = node.getNext();
         }
         sb.append("]");

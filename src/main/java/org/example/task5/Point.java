@@ -1,43 +1,76 @@
 package org.example.task5;
-
+/**
+ * объект <code> класса Point</code> реализует поведение точки
+ * @author Пойда Инвар
+ * @author Скороходов Данил
+ * @version 1.1
+ */
 public class Point {
 
-    /**
-     * Все методы - методы доступа
-     * param x - координата x
-     * param y - координата y
-     */
 
+    /**
+     * Координата x
+     */
     private final double x; // final - т.к. нигде не изменяется
+    /**
+     * Координата y
+     */
     private final double y; // final - т.к. нигде не изменяется
 
     // Конструктор с параметрами
+    /**
+     * Конструктор с параметрами
+     * @param x  координату точки на оси X
+     * @param y  координату точки на оси Y
+     */
     public Point(double x, double y) {
         this.x = x;
         this.y = y;
     }
 
     // Пустой конструктор
+    /**
+     * Пустой конструктор
+     */
     public Point() {
         this(0, 0);
     }
 
     // Геттер для x
+    /**
+     * Геттер для x
+     * @return возвращает координату X
+     */
     public double getX() {
         return this.x;
     }
 
     // Геттер для y
+    /**
+     * Геттер для y
+     * @return возвращает координату y
+     */
     public double getY() {
         return this.y;
     }
 
     // Перемещает точку на новые координаты
+    /**
+     * Перемещает точку на новые координаты
+     * @param x  координату точки на оси X
+     * @param y  координату точки на оси Y
+     * @return  возвращает новые координаты точки
+     */
     public Point translate(int x, int y) {
         return new Point(this.x + x, this.y + y);
     }
 
     // Изменяет масшатаб по обеим координатам
+    /**
+     * Изменяет масшатаб по обеим координатам
+     * @param k  маштаб
+     * @return  возвращает новые координаты точки
+     */
     public Point scale(double k) {
         return new Point(this.x * k, this.y * k);
     }
@@ -48,6 +81,11 @@ public class Point {
     // Он ругаться будет за @Override? (в плане очень сильно дрючить)
     // P.P.S.
     // Надо не забыть удалить эти комменты
+    /**
+     * Перегруженный метод toString, чтобы можно было выводить
+     *  объект Point в System.out.print()
+     * @return  возвращает строгу с координатами точки
+     */
     @Override
     public String toString() {
         return "Point(" + this.x + ", " + this.y + ")";

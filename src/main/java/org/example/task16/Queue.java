@@ -1,6 +1,48 @@
 package org.example.task16;
 
+import java.util.NoSuchElementException;
+
 public class Queue<T> {
+    public class Iterator {
+        private Node next;
+        private Node  ptr;
+
+        Iterator(Node first) {
+            ptr = null;
+            next = first;
+        }
+
+        boolean hasNext() {
+            return next != null;
+        }
+
+        T remove() {
+            if (ptr.prev == null) {
+                ptr = null;
+                return Queue.this.remove();
+            }
+            Node del = ptr;
+            ptr.prev.next = next;
+            ptr = null;
+            Queue.this.size--;
+            return del.data;
+        }
+
+        T next() {
+            if (hasNext()) {
+                T res = next.data;
+                ptr = next;
+                next = ptr.next;
+                return res;
+            } else {
+                throw new NoSuchElementException("next = null");
+            }
+        }
+
+        public T current() {
+            return ptr.data;
+        }
+    }
     public class Node {
         /**
          * param data - информауия, которую хранит Node
@@ -9,6 +51,7 @@ public class Queue<T> {
          * В задании не говорилось какую конкретно очередь реализовывать -
          * односвязную или двусвязную. Сделал двусвязную
          */
+
         private T data;
         private Node next;
         private Node prev;
@@ -60,6 +103,9 @@ public class Queue<T> {
         last = null;
         size = 0;
     }
+    public Iterator iterator() {
+        return new Iterator(first);
+    }
 
     /**
      * добавляет новый Node в конец очереди
@@ -91,20 +137,23 @@ public class Queue<T> {
     /**
      * удаляет первый элемент очереди
      */
-    public void remove() {
-        if (size == 0) return;
+    public T remove() {
+        if (size == 0) return null;
 
         if (size == 1) {
+            Node it = first;
             first = null;
             last = null;
             size--;
-            return;
+            return it.data;
         }
-
+        Node it = first;
         Node node = first.getNext();
         node.setPrev(null);
         first = node;
         size--;
+        return it.data;
+
     }
 
     /**

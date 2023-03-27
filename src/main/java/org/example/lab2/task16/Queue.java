@@ -3,7 +3,7 @@ package org.example.lab2.task16;
 import java.util.NoSuchElementException;
 
 public class Queue {
-    public class Iterator {
+    public static class Iterator {
         private Node next;
         private Node ptr;
 
@@ -22,13 +22,12 @@ public class Queue {
                 ptr = next;
                 next = ptr.next;
                 return res;
-            } else {
-                throw new NoSuchElementException("next = null");
             }
+            throw new NoSuchElementException("next = null");
         }
     }
 
-    private class Node {
+    private static class Node {
         private final String value;
         private Node next;
 

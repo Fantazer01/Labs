@@ -1,138 +1,109 @@
 package org.example.task16;
 
-public class Queue<T> {
-    public class Node {
-        /**
-         * param data - информауия, которую хранит Node
-         * param next - следующий Node
-         * param prev - передыдущий Node
-         * В задании не говорилось какую конкретно очередь реализовывать -
-         * односвязную или двусвязную. Сделал двусвязную
-         */
-        private T data;
+import java.util.NoSuchElementException;
+
+public class Queue {
+    public class Iterator {
         private Node next;
-        private Node prev;
-        public Node(T data) {
-            this.data = data;
-            next = null;
-            prev = null;
+        private Node ptr;
+
+        Iterator(Node node) {
+            ptr = null;
+            next = node;
         }
 
-        public T getData() {
-            return data;
+        public boolean hasNext() {
+            return next != null;
         }
 
-        public void setData(T data) {
-            this.data = data;
+        public String next() {
+            if (hasNext()) {
+                String res = next.value;
+                ptr = next;
+                next = ptr.next;
+                return res;
+            } else {
+                throw new NoSuchElementException("next = null");
+            }
+        }
+    }
+
+    private class Node {
+        private final String value;
+        private Node next;
+
+        Node(String value) {
+            this.value = value;
+            this.next = null;
         }
 
-        public void setNext(Node next) {
-            this.next = next;
+        public String value() {
+            return value;
         }
 
-        public Node getNext() {
+        public Node next() {
             return next;
         }
-
-        public void setPrev(Node prev) {
-            this.prev = prev;
-        }
-
-        public Node getPrev() {
-            return prev;
-        }
     }
 
-    /**
-     * param first - первый Node в очереди
-     * param last - последний Node в очереди
-     * param size - размер очереди
-     */
-    private Node first;
-    private Node last;
-    private int size;
+    private Node head;
+    private Node tail;
 
-    /**
-     * Пустой конструктор
-     */
     public Queue() {
-        first = null;
-        last = null;
-        size = 0;
+        head = null;
+        tail = null;
+    }
+
+    public Iterator iterator() {
+        return new Iterator(head);
     }
 
     /**
-     * добавляет новый Node в конец очереди
-     * @param data ифнормация которую хранит элемент очереди
+     * добавляет элемент в хвост очереди
      */
-    public void add(T data) {
-        if (size == 0) {
-            first = new Node(data);
-            last = first;
-            size++;
-            return;
+    public void add(String value) {
+        Node newNode = new Node(value);
+        if (tail == null) {
+            head = newNode;
+        } else {
+            tail.next = newNode;
         }
-
-        if (size == 1) {
-            last = new Node(data);
-            first.setNext(last);
-            last.setPrev(first);
-            size++;
-            return;
-        }
-
-        Node node = last;
-        last = new Node(data);
-        node.setNext(last);
-        last.setPrev(node);
-        size++;
+        tail = newNode;
     }
 
     /**
-     * удаляет первый элемент очереди
+     * удаляет элемент из головы очереди
      */
     public void remove() {
-        if (size == 0) return;
-
-        if (size == 1) {
-            first = null;
-            last = null;
-            size--;
-            return;
+        if (head == null) {
+            throw new IllegalStateException("Queue is empty");
         }
-
-        Node node = first.getNext();
-        node.setPrev(null);
-        first = node;
-        size--;
-    }
-
-    /**
-     * геттер для size
-     * @return возвращает размер очереди
-     */
-    public int size() {
-        return size;
+        head = head.next;
+        if (head == null) {
+            tail = null;
+        }
     }
 
     /**
      * Перегруженный метод toString, чтобы можно было выводить
      *  объект Queue в System.out.print()
-     * @return  возвращает строку с содержимым очереди
+     * @return возвращает строку с содержимым очереди
      */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        Node node = first;
+        Node node = head;
         sb.append("[");
-        for (int i = 0; i < size; i++) {
-            sb.append("'");
-            sb.append(node.getData());
-            sb.append("'");
-            if (node.next != null) {
-                sb.append(",");
-            }
-            node = node.getNext();
+        if (node != null) {
+            do {
+                sb.append("'");
+                sb.append(node.value());
+                sb.append("'");
+                if (node.next != null) {
+                    sb.append(",");
+                }
+                node = node.next();
+            } while(node != null);
         }
         sb.append("]");
         return sb.toString();

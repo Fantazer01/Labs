@@ -22,19 +22,9 @@ public class Car {
         this.fuelConsumption = fuelConsumption;
     }
 
-    // Геттер для дистанции
-    public double getDistance() {
-        return this.x;
-    }
-
-    // Геттер для оставшегося бензина
-    public double getGasLeft() {
-        return this.gasLeft;
-    }
-
     // Перемещение машины
     public boolean translate(double x) {
-        double gas = x / this.fuelConsumption;
+        double gas = Math.abs(x / this.fuelConsumption);
         if (gas > this.gasLeft) {
             return false;
         }
@@ -54,7 +44,7 @@ public class Car {
     // объект Point в System.out.print()
     @Override
     public String toString() {
-        return "Car(" + this.x + ",\n    tankVolume: " + this.tankVolume + "\n    gasLeft: " +
-                this.gasLeft + "\n    fuelConsumption: " + this.fuelConsumption + ")";
+        return "Дистанция от начала координат: " + Math.abs(this.x) + "\nОбъем бака: " + this.tankVolume + "\nТоплива осталось: " +
+                this.gasLeft + "\nРасход топлива: " + this.fuelConsumption;
     }
 }

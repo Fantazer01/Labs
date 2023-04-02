@@ -1,4 +1,4 @@
-package org.example.Dentest2;
+package org.example.lab2.Dentest2;
 
 public class Main {
     public static void main(String[] argv) {

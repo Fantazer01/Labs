@@ -1,4 +1,4 @@
-package org.example.Dentest;
+package org.example.lab2.Dentest;
 
 
 import java.util.ArrayList;

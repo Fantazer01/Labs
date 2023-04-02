@@ -11,9 +11,11 @@ public class Task16 {
         queue.remove();
         System.out.println(queue);
 
-        Queue.Iterator iter1 = queue.iterator();
-        while (iter1.hasNext()) {
-            System.out.println(iter1.next());
+        Queue.Iterator iterator = queue.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
         }
+        iterator.remove();
+        System.out.println(queue);
     }
 }

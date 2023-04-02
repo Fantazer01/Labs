@@ -1,4 +1,4 @@
-package org.example.additional;
+package org.example.lab2.additional;
 
 public class Ball {
     private static class Point{

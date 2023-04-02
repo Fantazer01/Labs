@@ -15,21 +15,9 @@ public class Ball {
             this.y=y;
             this.z=z;
         }
-
-        public int getX() {
-            return x;
-        }
-
-        public int getY() {
-            return y;
-        }
-
-        public int getZ() {
-            return z;
-        }
     }
-    private Point center;
-    private int radius;
+    private final Point center;
+    private final int radius;
     Ball(){
       this.center = new Point();
       this.radius =0;

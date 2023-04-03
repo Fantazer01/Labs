@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Task9 {
     private static void menu() {
-        System.out.println("1. Статус\n2. Заправиться\n3. Ехать\n0. Выход");
+        System.out.println("1. Статус\n2. Заправиться\n3. Ехать\n4. Вернуться в начало координат\n0. Выход");
         System.out.print("Ваш выбор: ");
     }
 
@@ -71,6 +71,7 @@ public class Task9 {
 
                 case 4:
                     car.translateToOrigin();
+                    System.out.println();
                     break;
 
                 case 0:

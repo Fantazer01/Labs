@@ -28,6 +28,10 @@ public class Car {
             return Math.sqrt(Math.pow(point.x() - this.x, 2) + Math.pow(point.y() - this.y, 2));
         }
 
+        public boolean isOrigin() {
+            return x == 0 && y == 0;
+        }
+
         @Override
         public String toString() {
             return String.format("(%.2f, %.2f)", x, y);
@@ -62,15 +66,18 @@ public class Car {
         double gas = distance / this.fuelConsumption;
         if (gas > this.gasLeft) {
             double real_dist = this.gasLeft * this.fuelConsumption;
-            this.coord = new Point(this.coord.x() + point.x() / distance * real_dist,
-                    this.coord.y() + point.y() / distance * real_dist);
+            if (point.isOrigin()) {
+                this.coord = new Point(this.coord.x() - this.coord.x() / distance * real_dist,
+                        this.coord.y() - this.coord.y() / distance * real_dist);
+            } else {
+                this.coord = new Point(this.coord.x() + point.x() / distance * real_dist,
+                        this.coord.y() + point.y() / distance * real_dist);
+            }
             this.gasLeft = 0;
-            System.out.println(real_dist);
             this.distance += real_dist;
         } else {
             this.coord = point;
             this.gasLeft -= gas;
-            System.out.println(distance);
             this.distance += distance;
         }
     }

@@ -8,10 +8,10 @@ public class Queue {
         private Node ptr;
         private Node previous;
 
-        Iterator(Node node) {
+        private Iterator() {
             previous = null;
             ptr = null;
-            next = node;
+            next = head;
         }
 
         public boolean hasNext() {
@@ -75,7 +75,7 @@ public class Queue {
     }
 
     public Iterator iterator() {
-        return new Iterator(head);
+        return new Iterator();
     }
 
     /**

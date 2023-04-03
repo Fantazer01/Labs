@@ -40,7 +40,12 @@ public class Ball {
 
         if (distance >= radius+a.radius)
             return 0;
-
+        if(radius>=distance+a.radius){
+            return Math.PI*Math.pow(a.radius,2);
+        }
+        if(a.radius>=distance+radius){
+            return Math.PI*Math.pow(radius,2);
+        }
         double Radius= Math.sqrt(
                 Math.pow(radius,2) - Math.pow(((double) (radius + a.radius) / 2 - distance / 2),2)
         );

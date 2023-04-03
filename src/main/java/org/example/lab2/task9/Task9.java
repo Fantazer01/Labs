@@ -11,10 +11,19 @@ public class Task9 {
     public static void main(String[] args) {
         Car car = new Car(5, 50);
         Scanner scanner = new Scanner(System.in);
-        int choice;
+        int choice = 1;
         do {
             menu();
-            choice = scanner.nextInt();
+
+            if (scanner.hasNextInt()) {
+                choice = scanner.nextInt();
+            } else {
+                System.out.println("Неверный ввод.\n");
+                scanner.nextLine();
+                continue;
+            }
+
+            scanner.nextLine();
             switch (choice) {
                 case 1:
                     System.out.println();
@@ -25,25 +34,43 @@ public class Task9 {
                 case 2:
                     System.out.println();
                     System.out.print("Количество топлива: ");
-                    double fuel = scanner.nextDouble();
-                    if (car.fillCar(fuel)) {
-                        System.out.println("Машина заправлена");
+                    double fuel;
+
+                    if (scanner.hasNextInt()) {
+                        fuel = scanner.nextDouble();
                     } else {
-                        System.out.println("Машина не заправлена");
+                        System.out.println("Неверный ввод.\n");
+                        scanner.nextLine();
+                        break;
                     }
+                    car.fillCar(fuel);
                     System.out.println();
                     break;
 
                 case 3:
-                    System.out.println();
-                    System.out.print("Количество километров, которые надо проехать: ");
-                    double distance = scanner.nextDouble();
-                    if (car.translate(distance)) {
-                        System.out.println("Машина едет");
-                    } else {
-                        System.out.println("Машина не едет");
+                    try {
+                        System.out.println();
+                        System.out.print("Координаты точки, в которую поедет машина: ");
+
+                        String[] str_coord = new String[0];
+                        if (scanner.hasNextLine()) {
+                            str_coord = scanner.nextLine().split(" ");
+                            if (str_coord.length != 2) {
+                                System.out.println("Неверный формат координат.\n");
+                                break;
+                            }
+                        }
+
+                        car.translate(new Car.Point(Double.parseDouble(str_coord[0]), Double.parseDouble(str_coord[1])));
+                        System.out.println();
+                        break;
                     }
-                    System.out.println();
+                    catch (NumberFormatException e) {
+                        System.out.println("Неверный формат координат.\n");
+                    }
+
+                case 4:
+                    car.translateToOrigin();
                     break;
 
                 case 0:

@@ -6,10 +6,12 @@ public class Queue {
     public static class Iterator {
         private Node next;
         private Node ptr;
+        private Node previous;
 
-        Iterator(Node node) {
+        private Iterator() {
+            previous = null;
             ptr = null;
-            next = node;
+            next = head;
         }
 
         public boolean hasNext() {
@@ -19,11 +21,29 @@ public class Queue {
         public String next() {
             if (hasNext()) {
                 String res = next.value;
+                previous = ptr;
                 ptr = next;
                 next = ptr.next;
                 return res;
             }
             throw new NoSuchElementException("next = null");
+        }
+
+        public void remove() {
+            if (ptr == null)
+                throw new NoSuchElementException("");
+
+            if (previous == null) {
+                ptr = next;
+                if (hasNext())
+                    next = ptr.next;
+                head = ptr;
+            } else {
+                ptr = next;
+                if (hasNext())
+                    next = ptr.next;
+                previous.next = ptr;
+            }
         }
     }
 
@@ -54,7 +74,7 @@ public class Queue {
     }
 
     public Iterator iterator() {
-        return new Iterator(head);
+        return new Iterator();
     }
 
     /**

@@ -24,7 +24,7 @@ public class Task14 {
     private static Employee[] createEmployees() {
         return new Employee[] {
                 new Employee("Oleg", 12),
-                new Employee("Danil", 8.999),
+                new Employee("Danil", 11.999),
                 new Employee("Invar", 12),
                 new Employee("Ivan", 9999.9999)
         };

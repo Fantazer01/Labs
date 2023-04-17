@@ -5,47 +5,47 @@ import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntFunction;
 import java.util.function.ToLongFunction;
 
-public interface OurComparator<T> {
+public interface Comparator<T> {
     int compare(T o1, T o2);
-    static <T, U extends Comparable<? super U>> OurComparator<T> comparing(Function<? super T, ? extends U> keyExtractor){
+    static <T, U extends Comparable<? super U>> Comparator<T> comparing(Function<? super T, ? extends U> keyExtractor){
         return (ob1, ob2) -> keyExtractor.apply(ob1).compareTo(keyExtractor.apply(ob2));
     }
-    static <T, U> OurComparator<T> comparing(Function<? super T,? extends U> keyExtractor, OurComparator<? super U> keyComparator){
+    static <T, U> Comparator<T> comparing(Function<? super T,? extends U> keyExtractor, Comparator<? super U> keyComparator){
         return (ob1, ob2) -> keyComparator.compare(keyExtractor.apply(ob1), keyExtractor.apply(ob2));
     }
-    static <T> OurComparator<T> comparingDouble(ToDoubleFunction<? super T> keyExtractor){
+    static <T> Comparator<T> comparingDouble(ToDoubleFunction<? super T> keyExtractor){
         return (ob1, ob2) -> Double.compare(keyExtractor.applyAsDouble(ob1), keyExtractor.applyAsDouble(ob2));
     }
-    static <T> OurComparator<T> comparingInt(ToIntFunction<? super T> keyExtractor){
+    static <T> Comparator<T> comparingInt(ToIntFunction<? super T> keyExtractor){
         return (ob1, ob2) -> Integer.compare(keyExtractor.applyAsInt(ob1), keyExtractor.applyAsInt(ob2));
     }
-    static <T> OurComparator<T> comparingLong(ToLongFunction<? super T> keyExtractor){
+    static <T> Comparator<T> comparingLong(ToLongFunction<? super T> keyExtractor){
         return (ob1, ob2) -> Long.compare(keyExtractor.applyAsLong(ob1), keyExtractor.applyAsLong(ob2));
     }
-    static <T extends Comparable<? super T>> OurComparator<T> naturalOrder(){
+    static <T extends Comparable<? super T>> Comparator<T> naturalOrder(){
         return (ob1, ob2) -> ob1.compareTo(ob2);
     }
-    static <T> OurComparator<T> nullsFirst(OurComparator<? super T> comparator){
+    static <T> Comparator<T> nullsFirst(Comparator<? super T> comparator){
         return (ob1, ob2) -> {
             if(ob1 == null) return -1;
             if(ob2 == null) return 1;
             return comparator.compare(ob1, ob2);
         };
     }
-    static <T> OurComparator<T> nullsLast(OurComparator<? super T> comparator){
+    static <T> Comparator<T> nullsLast(Comparator<? super T> comparator){
         return (ob1, ob2) -> {
             if(ob1 == null) return 1;
             if(ob2 == null) return -1;
             return comparator.compare(ob1, ob2);
         };
     }
-    default OurComparator<T> reversed(){
+    default Comparator<T> reversed(){
         return (ob1, ob2) -> compare(ob2, ob1);
     }
-    static <T extends Comparable<? super T>> OurComparator<T> reverseOrder(){
+    static <T extends Comparable<? super T>> Comparator<T> reverseOrder(){
         return (ob1, ob2) -> ob2.compareTo(ob1);
     }
-    default OurComparator<T> thenComparing(OurComparator<? super T> other){
+    default Comparator<T> thenComparing(Comparator<? super T> other){
         return (ob1, ob2) -> {
             int result = compare(ob1, ob2);
             if(result == 0){
@@ -55,7 +55,7 @@ public interface OurComparator<T> {
             }
         };
     }
-    default <U extends Comparable<? super U>> OurComparator<T> thenComparing(Function<? super T,? extends U> keyExtractor){
+    default <U extends Comparable<? super U>> Comparator<T> thenComparing(Function<? super T,? extends U> keyExtractor){
         return (ob1, ob2) -> {
             int result = compare(ob1, ob2);
             if(result == 0){
@@ -65,7 +65,7 @@ public interface OurComparator<T> {
             }
         };
     }
-    default <U> OurComparator<T> thenComparing(Function<? super T,? extends U> keyExtractor, OurComparator<? super U> keyComparator){
+    default <U> Comparator<T> thenComparing(Function<? super T,? extends U> keyExtractor, Comparator<? super U> keyComparator){
         return (ob1, ob2) -> {
             int result = compare(ob1, ob2);
             if(result == 0){
@@ -75,7 +75,7 @@ public interface OurComparator<T> {
             }
         };
     }
-    default OurComparator<T> thenComparingDouble(ToDoubleFunction<? super T> keyExtractor){
+    default Comparator<T> thenComparingDouble(ToDoubleFunction<? super T> keyExtractor){
         return (ob1, ob2) -> {
             int result = compare(ob1, ob2);
             if(result == 0){
@@ -85,7 +85,7 @@ public interface OurComparator<T> {
             }
         };
     }
-    default OurComparator<T> thenComparingLong(ToLongFunction<? super T> keyExtractor){
+    default Comparator<T> thenComparingLong(ToLongFunction<? super T> keyExtractor){
         return (ob1, ob2) -> {
             int result = compare(ob1, ob2);
             if(result == 0){
@@ -95,7 +95,7 @@ public interface OurComparator<T> {
             }
         };
     }
-    default OurComparator<T> thenComparingInt(ToIntFunction<? super T> keyExtractor){
+    default Comparator<T> thenComparingInt(ToIntFunction<? super T> keyExtractor){
         return (ob1, ob2) -> {
             int result = compare(ob1, ob2);
             if(result == 0){

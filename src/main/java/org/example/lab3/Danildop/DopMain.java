@@ -1,6 +1,4 @@
-package org.example.Danildop;
-
-import org.example.lab3.task4_5.IntSequence;
+package org.example.lab3.Danildop;
 
 public class DopMain {
         public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package org.example.Danildop;
+package org.example.lab3.Danildop;
 
 import java.util.Iterator;
 import java.util.function.Predicate;

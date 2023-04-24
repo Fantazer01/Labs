@@ -1,5 +1,7 @@
 package org.example.lab4.Task4_5;
 
+import org.example.lab4.Task1_3.Points.Point;
+
 public abstract class Shape {
     protected final Point point;
 

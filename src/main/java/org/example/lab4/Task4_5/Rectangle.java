@@ -1,5 +1,7 @@
 package org.example.lab4.Task4_5;
 
+import org.example.lab4.Task1_3.Points.Point;
+
 public class Rectangle extends Shape{
     private final double width;
     private final double height;

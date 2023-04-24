@@ -1,0 +1,44 @@
+package org.example.lab4.Task4_5;
+
+public class Point {
+    private double x;
+    private double y;
+
+    public Point(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public double getX() {
+        return x;
+    }
+    public double getY() {
+        return y;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+    public void setY(double y) {
+        this.y = y;
+    }
+
+    public void translate(double dx, double dy) {
+        x += dx;
+        y += dy;
+    }
+    public void move(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public boolean equals(Point other) {
+        if (this == other) return true;
+        return this.x == other.getX() && this.y == other.getY();
+    }
+
+    @Override
+    public String toString() {
+        return "Point(%.1f;%.1f)".formatted(x, y);
+    }
+}

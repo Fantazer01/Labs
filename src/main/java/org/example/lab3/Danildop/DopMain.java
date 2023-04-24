@@ -20,16 +20,11 @@ public class DopMain {
     private static void firstCase() {
         String[] array = getStrings();
 
-        Predicate<String> predicate = (str) -> {
-            return str.length() > 3;
-        };
-
         Iterator<String> iterator = MyIterator.fromIterator(Arrays.stream(array)
-                .iterator()).filter(predicate);
+                .iterator()).filter(str -> str.length() > 3);
 
-        while (iterator.hasNext()) {
+        while (iterator.hasNext())
                 System.out.println(iterator.next());
-        }
     }
 
     private static String[] getStrings() {

@@ -44,11 +44,13 @@ public class MyIterator<T> implements Iterator<T> {
     private boolean funcHasNext() {
         if (_iterator.hasNext()) {
             T item1 = _iterator.next();
+            T item2;
             if (_iterator.hasNext()) {
-                T item2 = _iterator.next();
-                _result = _func.apply(item1, item2);
-                return true;
-            }
+                item2 = _iterator.next();
+            } else
+                item2 = item1;
+            _result = _func.apply(item1, item2);
+            return true;
         }
         return false;
     }

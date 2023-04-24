@@ -32,6 +32,11 @@ public class Point {
         this.y = y;
     }
 
+    public boolean equals(Point other) {
+        if (this == other) return true;
+        return this.x == other.getX() && this.y == other.getY();
+    }
+
     @Override
     public String toString() {
         return "Point(%.1f;%.1f)".formatted(x, y);

@@ -3,13 +3,14 @@ package org.example.lab4.Task4_5;
 public class Line extends Shape{
     private final Point to;
 
-    public Line(Point from, Point to) {
+    public Line(Point from, Point to) throws IllegalArgumentException {
         super(from);
+        if (from.equals(to)) throw new IllegalArgumentException("Points cannot be equal.");
         this.to = to;
     }
 
-    public Line(double toX, double toY, double fromX, double fromY) {
-        this(new Point(toX, toY), new Point(fromX, fromY));
+    public Line(double toX, double toY, double fromX, double fromY) throws IllegalArgumentException {
+        this(new Point(fromX, fromY), new Point(toX, toY));
     }
 
     @Override

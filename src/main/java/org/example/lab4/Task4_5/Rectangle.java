@@ -6,12 +6,12 @@ public class Rectangle extends Shape{
 
     public Rectangle(Point topLeft, double width, double height) throws IllegalArgumentException {
         super(topLeft);
-        if (width < 0 | height < 0) throw new IllegalArgumentException("Width and height cannot be negative");
+        if (width <= 0 | height <= 0) throw new IllegalArgumentException("Width and height cannot be negative.");
         this.width = width;
         this.height = height;
     }
 
-    public Rectangle(double topLeftX, double topLeftY, double width, double height) {
+    public Rectangle(double topLeftX, double topLeftY, double width, double height) throws IllegalArgumentException {
         this(new Point(topLeftX, topLeftY), width, height);
     }
 

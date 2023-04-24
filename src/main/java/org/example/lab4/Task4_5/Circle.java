@@ -3,12 +3,13 @@ package org.example.lab4.Task4_5;
 public class Circle extends Shape {
     private final double radius;
 
-    public Circle(Point point, double radius) {
+    public Circle(Point point, double radius) throws IllegalArgumentException {
         super(point);
+        if (radius <= 0) throw new IllegalArgumentException("Radius must be more than 0.");
         this.radius = radius;
     }
 
-    public Circle(double x, double y, double radius) {
+    public Circle(double x, double y, double radius) throws IllegalArgumentException {
         this(new Point(x, y), radius);
     }
 

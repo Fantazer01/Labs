@@ -4,6 +4,6 @@ public class Task9 {
     public static void main(String[] args) {
         Item item = new Item();
 
-        System.out.println(item);
+        System.out.println(ToStringConverter.toString(item));
     }
 }

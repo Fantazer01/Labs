@@ -4,16 +4,28 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
 public class ToStringConverter {
-    public static String toString(Object obj) {
+    public static String toString(Object obj) throws IllegalAccessException {
+        if (obj.getClass() == String.class) {
+            return obj.toString();
+        } else if (obj.getClass() == Integer.class) {
+            return obj.toString();
+        } else {
+            return recursion(obj);
+        }
+    }
+
+    private static String recursion(Object obj) throws IllegalAccessException {
         Class<?> _class = obj.getClass();
         StringBuilder stringBuilder = new StringBuilder(_class.getName());
-        stringBuilder.append(" { ");
+        stringBuilder.append(": { ");
         for (Field field : _class.getDeclaredFields()) {
-            stringBuilder.append("\n\t");
-            stringBuilder.append(printParamField(field));
             stringBuilder.append(field.getName());
+            stringBuilder.append(" = ");
+            stringBuilder.append(toString(field.get(obj)));
+            stringBuilder.append("; ");
+
         }
-        stringBuilder.append("\n}");
+        stringBuilder.append("}");
         return stringBuilder.toString();
     }
 

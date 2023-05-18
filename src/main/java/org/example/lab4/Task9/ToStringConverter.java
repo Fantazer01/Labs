@@ -6,7 +6,7 @@ import java.lang.reflect.Modifier;
 public class ToStringConverter {
     public static String toString(Object obj) throws IllegalAccessException {
         if (obj.getClass() == String.class) {
-            return obj.toString();
+            return "\"" + obj.toString() + "\"";
         } else if (obj.getClass() == Integer.class) {
             return obj.toString();
         } else {
@@ -19,6 +19,7 @@ public class ToStringConverter {
         StringBuilder stringBuilder = new StringBuilder(_class.getName());
         stringBuilder.append(": { ");
         for (Field field : _class.getDeclaredFields()) {
+            field.setAccessible(true);
             stringBuilder.append(field.getName());
             stringBuilder.append(" = ");
             stringBuilder.append(toString(field.get(obj)));

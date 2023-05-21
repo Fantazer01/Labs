@@ -4,20 +4,23 @@ import java.util.ServiceLoader;
 
 public class Main {
     public static ServiceLoader<Cipher> cipherLoader = ServiceLoader.load(Cipher.class);
-    public static Cipher getCipher ( int minStrength){
+    public static Cipher getCipher ( String name){
         for (Cipher cipher : cipherLoader) {  // неявно вызывает итератор
-
-            if (cipher.strength() >= minStrength)
+            if (cipher.getName().equals(name))
                 return cipher;
-
         }
         return null;
     }
     public static void main(String[] args) {
-
-        Cipher test = getCipher(1);
-        byte[] code = new byte[]{1, 2, 3, 4, 5, 6};
+        byte[] code = new byte[]{51, 72, 23, 94, 15, 6};
         byte[] key = new byte[]{7, 8, 9, 10, 11, 12};
+        cripto(code,key,"Caesar");
+        cripto(code,key,"Hash");
+        cripto(code,key,"Minus");
+    }
+    private static void cripto(byte[] code, byte[] key,String x){
+        Cipher test = getCipher(x);
+        System.out.println(x);
         byte[] newcode;
         printer(code,"Оригинал");
         assert test != null;

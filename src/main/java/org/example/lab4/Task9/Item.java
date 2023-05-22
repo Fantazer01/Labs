@@ -6,5 +6,6 @@ public class Item {
 
     public int a = 5;
     private String name = "Aga";
+    public Item2 item2 = null;
 
 }
